@@ -1,0 +1,36 @@
+{
+    "electricityMenu": {
+      "title": "Electricity Services",
+      "subtitle": "Please choose an option according to your need",
+  
+      "billPayment": {
+        "title": "Bill Payment",
+        "desc": "Pay your electricity bill online quickly"
+      },
+  
+      "newConnection": {
+        "title": "New Connection",
+        "desc": "Apply for a new electricity connection"
+      },
+  
+      "complaints": {
+        "title": "Complaints",
+        "desc": "Register and track your complaints"
+      },
+  
+      "outage": {
+        "title": "Outage Status",
+        "desc": "Check live outage and supply status"
+      },
+  
+      "history": {
+        "title": "Payment History",
+        "desc": "View your past payment records"
+      },
+  
+      "meter": {
+        "title": "Meter Reading",
+        "desc": "Submit and track meter readings"
+      }
+    }
+  }

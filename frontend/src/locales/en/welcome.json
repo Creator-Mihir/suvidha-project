@@ -1,0 +1,19 @@
+{
+    "header": {
+      "title": "Welcome to SUVIDHA! 🎉",
+      "subtitle": "What should we call you?"
+    },
+    "form": {
+      "fullName": "Enter your full name",
+      "city": "Your city (optional)"
+    },
+    "buttons": {
+      "continue": "Continue",
+      "saving": "Saving...",
+      "skip": "Skip for now"
+    },
+    "errors": {
+      "nameRequired": "Please enter your full name.",
+      "saveFailed": "Failed to save. Please try again."
+    }
+  }

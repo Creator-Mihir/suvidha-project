@@ -1,0 +1,17 @@
+{
+    "gov_secure": "Government of India\nSecure Access",
+    "heading_line1": "One Identity.",
+    "heading_line2": "Endless Services.",
+    "description": "Login securely to access Electricity, Water, Municipal services. Protected by 256-bit encryption.",
+    "secure_badge": "100% Secure",
+  
+    "welcome_back": "Welcome Back",
+    "enter_mobile_instruction": "Enter your Mobile No. using the touch keypad",
+  
+    "mobile_placeholder": "Mobile Number",
+    "otp_placeholder": "6-Digit OTP",
+    "otp_sent": "OTP Sent to {{mobile}}",
+  
+    "change_mobile": "Change Mobile Number",
+    "home": "Home"
+  }

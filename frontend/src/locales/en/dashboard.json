@@ -1,0 +1,36 @@
+{
+    "header": {
+      "badge": "Citizen Dashboard",
+      "title": "Select a Service",
+      "subtitle": "Access all your essential utility services in one place."
+    },
+    "services": {
+      "electricity": {
+        "title": "Electricity Bill Payment",
+        "desc": "Pay bills, check usage & download receipt"
+      },
+      "water": {
+        "title": "Water Services",
+        "desc": "Pay water bill & request new connection"
+      },
+      "gas": {
+        "title": "Gas Services",
+        "desc": "View gas bill & service requests"
+      },
+      "municipality": {
+        "title": "Municipality Services",
+        "desc": "Birth/Death certs, property tax & grievances"
+      },
+      "receipts": {
+        "title": "Download Receipt",
+        "desc": "Download previous payment receipts"
+      },
+      "track": {
+        "title": "Track Application",
+        "desc": "Track service & complaint status"
+      }
+    },
+    "common": {
+      "accessNow": "Access Now"
+    }
+  }
