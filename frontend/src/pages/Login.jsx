@@ -323,7 +323,7 @@ function Login() {
 
           {/* ── Subtle Staff Login Button ── */}
           <button
-            onClick={() => navigate("/admin/login")}
+            onClick={() => navigate("/adminlogin")}
             className="mt-6 flex items-center gap-2 text-slate-400 text-sm font-semibold hover:text-slate-600 transition-colors border border-slate-200 px-5 py-2 rounded-full bg-white/70 hover:bg-white shadow-sm"
           >
             🔒 Staff / Officer Login

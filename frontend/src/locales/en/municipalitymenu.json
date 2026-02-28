@@ -1,0 +1,30 @@
+{
+    "municipalityMenu": {
+        "title": "Municipality Services",
+        "subtitle": "Please select a service according to your need",
+        "propertyTax": {
+            "title": "Property Tax",
+            "desc": "Pay your property tax online"
+        },
+        "certificates": {
+            "title": "Certificates",
+            "desc": "Apply for Birth, Death, or Marriage certificates"
+        },
+        "complaints": {
+            "title": "Complaints",
+            "desc": "Register road, light, or garbage complaints"
+        },
+        "building": {
+            "title": "Building Approval",
+            "desc": "Submit and track building plan approvals"
+        },
+        "trade": {
+            "title": "Trade License",
+            "desc": "Apply for or renew a trade license"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check the status of your applications"
+        }
+    }
+}

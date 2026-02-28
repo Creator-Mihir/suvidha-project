@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Check, RefreshCw, Clock, Loader2 } from 'lucide-react';
 import { trackGasStatus } from '../../services/gasService';
 
 export default function GasTracking({ setView, externalId }) {
+  const { t } = useTranslation(["gas", "common"]);
   const [trackingId, setTrackingId] = useState(externalId || '');
-  const [trackData, setTrackData]   = useState(null);
-  const [loading, setLoading]       = useState(false);
-  const [error, setError]           = useState('');
+  const [trackData, setTrackData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (externalId) handleTrack(externalId);
@@ -20,7 +22,7 @@ export default function GasTracking({ setView, externalId }) {
       const res = await trackGasStatus(idToUse);
       setTrackData(res.data);
     } catch {
-      setError('Could not find this reference ID.');
+      setError(t("tracking.notFound"));
       setTrackData(null);
     } finally {
       setLoading(false);
@@ -30,19 +32,19 @@ export default function GasTracking({ setView, externalId }) {
   return (
     <div className="max-w-2xl mx-auto w-full">
       <button onClick={() => setView('menu')} className="text-orange-600 font-bold mb-6 flex items-center gap-2">
-        <ArrowLeft size={18} /> Back
+        <ArrowLeft size={18} /> {t("common:back")}
       </button>
       <div className="bg-white p-8 rounded-[3rem] shadow-xl border border-gray-100">
-        <h2 className="text-2xl font-bold mb-6">Track Your Request</h2>
+        <h2 className="text-2xl font-bold mb-6">{t("tracking.title")}</h2>
 
         <div className="flex gap-2 mb-8">
-          <input type="text" placeholder="Enter Ref ID / Ticket ID / App ID"
+          <input type="text" placeholder={t("tracking.enterId")}
             value={trackingId} onChange={(e) => setTrackingId(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && handleTrack()}
             className="flex-1 p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-orange-400" />
           <button onClick={() => handleTrack()} disabled={loading || !trackingId}
             className="bg-orange-600 text-white px-6 rounded-xl font-bold hover:bg-orange-700 disabled:opacity-50 flex items-center gap-2">
-            {loading ? <Loader2 className="animate-spin" size={18} /> : 'Track'}
+            {loading ? <Loader2 className="animate-spin" size={18} /> : t("tracking.track")}
           </button>
         </div>
 

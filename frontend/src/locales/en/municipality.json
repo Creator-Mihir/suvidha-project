@@ -1,0 +1,169 @@
+{
+    "menu": {
+        "title": "Municipality Services",
+        "subtitle": "Select a service based on your requirement",
+        "propertyTax": {
+            "title": "Property Tax",
+            "desc": "Pay your property tax online"
+        },
+        "certificates": {
+            "title": "Certificates",
+            "desc": "Apply for Birth, Death, Marriage certificates"
+        },
+        "complaints": {
+            "title": "Complaints",
+            "desc": "Register road, light, or garbage complaints"
+        },
+        "building": {
+            "title": "Building Approval",
+            "desc": "Submit and approve building plans"
+        },
+        "trade": {
+            "title": "Trade License",
+            "desc": "Apply for or renew trade licenses"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check status of your applications"
+        }
+    },
+    "propertyTax": {
+        "title": "Property Tax Payment",
+        "subtitle": "Enter your property details",
+        "selectProperty": "Select Property",
+        "propertyId": "Property ID / Index Number",
+        "search": "Search Property",
+        "owner": "Owner Name",
+        "amount": "Total Outstanding Tax",
+        "pay": "Pay Tax Now",
+        "period": "Payment Period",
+        "fullYear": "Full Year",
+        "halfYear": "Half Year",
+        "taxAmount": "Tax Amount",
+        "finYear": "Financial Year",
+        "baseTax": "Base Tax",
+        "eduCess": "Education Cess (10%)",
+        "swachhBharat": "Swachh Bharat Tax (10%)",
+        "total": "Total"
+    },
+    "certificates": {
+        "title": "Apply for Certificate",
+        "subtitle": "Select the type of certificate you need",
+        "birth": "Birth Certificate",
+        "death": "Death Certificate",
+        "marriage": "Marriage Certificate",
+        "fields": {
+            "childName": "Child Full Name",
+            "dob": "Date of Birth",
+            "pob": "Place of Birth",
+            "fatherName": "Father Name",
+            "motherName": "Mother Name",
+            "deceasedName": "Deceased Full Name",
+            "dod": "Date of Death",
+            "pod": "Place of Death",
+            "applicantName": "Applicant Name",
+            "relation": "Relation",
+            "groomName": "Groom Full Name",
+            "brideName": "Bride Full Name",
+            "dom": "Date of Marriage",
+            "pom": "Place of Marriage",
+            "witnessName": "Witness Name"
+        },
+        "requiredDocs": "Required: ID Proof + Supporting Documents",
+        "feeNote": "Application Fee: ₹50 | Processing: 7 working days",
+        "form": {
+            "fullName": "Full Name",
+            "date": "Date of Event",
+            "place": "Place of Event",
+            "submit": "Apply Now"
+        }
+    },
+    "complaints": {
+        "title": "Grievance Redressal",
+        "subtitle": "Report issues in your ward",
+        "catLabel": "Complaint Category",
+        "location": "Location / Area *",
+        "mobile": "Mobile Number",
+        "smsNote": "For SMS updates",
+        "road": "Road Maintenance",
+        "light": "Street Light",
+        "garbage": "Garbage Collection",
+        "water": "Water Leakage",
+        "description": "Description",
+        "submit": "File Complaint",
+        "selectCategory": "Please select a complaint category.",
+        "enterLocation": "Please enter location.",
+        "successTitle": "Complaint Registered!",
+        "successMsg": "Ticket ID: {{id}}\nResolution in 48 hours."
+    },
+    "building": {
+        "title": "Building Plan Approval",
+        "subtitle": "Online submission for plan approval",
+        "applicantName": "Applicant Name",
+        "mobile": "Mobile Number",
+        "plotNo": "Plot Number",
+        "area": "Total Area (sq. ft.)",
+        "purpose": "Construction Type",
+        "floors": "Number of Floors",
+        "address": "Site Address",
+        "types": {
+            "residential": "Residential",
+            "commercial": "Commercial",
+            "industrial": "Industrial",
+            "mixed": "Mixed Use"
+        },
+        "floorLabel": "Floor",
+        "floorsLabel": "Floors",
+        "docsTitle": "Required Documents:",
+        "docsList": {
+            "sitePlan": "Site Plan (AutoCAD/PDF)",
+            "ownership": "Ownership Proof",
+            "noc": "NOC from Neighbours",
+            "structural": "Structural Certificate"
+        },
+        "feeNote": "Fee: ₹2,500 | Processing: 15-30 working days",
+        "submit": "Submit Plan",
+        "successMsg": "Building Approval ID: {{id}}\nSite inspection in 7 days."
+    },
+    "trade": {
+        "title": "Trade License",
+        "subtitle": "Business permit and compliance",
+        "new": "New License",
+        "renew": "Renew License",
+        "existingNo": "Existing License Number",
+        "ownerName": "Owner Name",
+        "businessName": "Business Name",
+        "mobile": "Mobile Number",
+        "businessType": "Business Type",
+        "employees": "Number of Employees",
+        "idNumber": "Aadhaar / PAN Number",
+        "address": "Business Address",
+        "docsTitle": "Required Documents:",
+        "docsList": {
+            "aadhar": "Aadhaar Card",
+            "ownership": "Shop Ownership/Rent Proof",
+            "photo": "Passport Size Photo",
+            "noc": "NOC (if rented)"
+        },
+        "feeNote": "Fee: ₹500–₹2,000 | Valid: 1 Year",
+        "types": {
+            "retail": "Retail Shop",
+            "restaurant": "Restaurant / Hotel",
+            "medical": "Medical Pharmacy",
+            "salon": "Salon / Spa",
+            "workshop": "Workshop / Factory",
+            "other": "Other Business"
+        },
+        "nature": "Nature of Business",
+        "premises": "Premises Address",
+        "submit": "Apply for License"
+    },
+    "tracking": {
+        "title": "Service Status Tracker",
+        "enterId": "Application Reference Number",
+        "track": "Track Application",
+        "appId": "Application ID",
+        "smsNote": "SMS updates are being sent to your registered mobile number",
+        "notFound": "Could not find this reference ID."
+    }
+}

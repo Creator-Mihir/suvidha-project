@@ -1,4 +1,83 @@
 {
+  "menu": {
+    "title": "Electricity Services",
+    "subtitle": "Please choose an option according to your need",
+    "billPayment": {
+      "title": "Bill Payment",
+      "desc": "Pay your electricity bill online quickly"
+    },
+    "newConnection": {
+      "title": "New Connection",
+      "desc": "Apply for a new electricity connection"
+    },
+    "complaints": {
+      "title": "Complaints",
+      "desc": "Register and track your complaints"
+    },
+    "outage": {
+      "title": "Outage Status",
+      "desc": "Check live outage and supply status"
+    },
+    "history": {
+      "title": "Payment History",
+      "desc": "View your past payment records"
+    },
+    "meter": {
+      "title": "Meter Reading",
+      "desc": "Submit and track meter readings"
+    }
+  },
+  "billPayment": {
+    "enterConnection": "Enter Connection ID",
+    "enterSubtitle": "Enter connection number or select below",
+    "invalidConnection": "Please enter a valid connection ID",
+    "fetching": "Fetching Bill...",
+    "proceed": "Proceed",
+    "savedConnections": "Saved Connections",
+    "back": "Back",
+    "serviceTitle": "PowerGrid Services",
+    "consumerDetails": "Consumer Details",
+    "payableAmount": "Payable Amount",
+    "breakdown": "Detailed Charges Breakdown",
+    "usageAnalytics": "Usage Analytics",
+    "paymentHistory": "Payment History",
+    "downloadBill": "Download Bill",
+    "raiseDispute": "Raise Dispute",
+    "pay": "Pay"
+  },
+  "complaints": {
+    "title": "Register Complaint",
+    "subtitle": "Please provide details about the issue",
+    "category": "Issue Category",
+    "description": "Describe the problem",
+    "submit": "Submit Complaint",
+    "categories": {
+      "outage": "Power Outage",
+      "billing": "Billing Issue",
+      "meter": "Meter Fault",
+      "voltage": "Voltage Fluctuations",
+      "other": "Other Issues"
+    }
+  },
+  "newConnection": {
+    "title": "New Connection Request",
+    "subtitle": "Apply for domestic or commercial meters",
+    "applicantName": "Applicant Full Name",
+    "address": "Service Address",
+    "connectionType": "Connection Type",
+    "loadRequired": "Load Required (kW)",
+    "documents": "Upload ID Proof",
+    "submit": "Submit Application"
+  },
+  "tracking": {
+    "title": "Application Status",
+    "subtitle": "Track your requests and complaints",
+    "enterId": "Enter Reference/Application ID",
+    "track": "Track Now",
+    "results": "Tracking Results",
+    "status": "Current Status",
+    "updated": "Last Updated"
+  },
   "modal": {
     "trackNow": "Track Status Now",
     "backToMenu": "Back to Menu"

@@ -1,0 +1,22 @@
+{
+    "waterMenu": {
+        "title": "Water Services",
+        "subtitle": "Please choose an option according to your need",
+        "billPayment": {
+            "title": "Pay Water Bill",
+            "desc": "Pay your water bill online"
+        },
+        "newConnection": {
+            "title": "New Connection",
+            "desc": "Apply for a new water connection"
+        },
+        "complaints": {
+            "title": "Complaints",
+            "desc": "Register leakage or billing complaints"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check your application status"
+        }
+    }
+}

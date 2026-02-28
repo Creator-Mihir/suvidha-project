@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { Check, RefreshCw, Clock, Loader2 } from 'lucide-react';
 import { trackMuniStatus } from '../../services/municipalityService';
 
 export default function MunicipalityTracking({ externalId }) {
+  const { t } = useTranslation(["municipality", "common"]);
   const [trackingId, setTrackingId] = useState(externalId || '');
-  const [trackData, setTrackData]   = useState(null);
-  const [loading, setLoading]       = useState(false);
-  const [error, setError]           = useState('');
+  const [trackData, setTrackData] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (externalId) handleTrack(externalId);
@@ -20,7 +22,7 @@ export default function MunicipalityTracking({ externalId }) {
       const res = await trackMuniStatus(idToUse);
       setTrackData(res.data);
     } catch {
-      setError('Could not find this reference ID.');
+      setError(t("tracking.notFound"));
       setTrackData(null);
     } finally {
       setLoading(false);
@@ -30,16 +32,16 @@ export default function MunicipalityTracking({ externalId }) {
   return (
     <div className="max-w-2xl mx-auto w-full">
       <div className="bg-white p-8 rounded-[2rem] shadow-sm border border-gray-100">
-        <h2 className="text-2xl font-black text-slate-800 mb-6">Track Application Status</h2>
+        <h2 className="text-2xl font-black text-slate-800 mb-6">{t("tracking.title")}</h2>
 
         <div className="flex gap-2 mb-8">
-          <input type="text" placeholder="Enter Application / Complaint ID"
+          <input type="text" placeholder={t("tracking.enterId")}
             value={trackingId} onChange={(e) => { setTrackingId(e.target.value); setTrackData(null); }}
             onKeyDown={(e) => e.key === 'Enter' && handleTrack()}
             className="flex-1 p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-purple-400" />
           <button onClick={() => handleTrack()} disabled={loading || !trackingId}
             className="bg-purple-700 text-white px-6 rounded-xl font-bold hover:bg-purple-800 disabled:opacity-50 flex items-center gap-2">
-            {loading ? <Loader2 className="animate-spin" size={18} /> : 'Track'}
+            {loading ? <Loader2 className="animate-spin" size={18} /> : t("tracking.track")}
           </button>
         </div>
 
@@ -49,7 +51,7 @@ export default function MunicipalityTracking({ externalId }) {
           <div className="space-y-6 animate-in slide-in-from-bottom-2">
             <div className="bg-purple-50 p-4 rounded-2xl border border-purple-100 flex justify-between items-center">
               <div>
-                <p className="text-xs font-bold text-purple-600 uppercase">Application ID</p>
+                <p className="text-xs font-bold text-purple-600 uppercase">{t("tracking.appId")}</p>
                 <p className="text-lg font-black text-purple-900">{trackData.refId}</p>
               </div>
               <span className={`px-3 py-1 rounded-full text-xs font-bold ${trackData.currentStatus === 'resolved' ? 'bg-green-100 text-green-700' : 'bg-purple-100 text-purple-700'}`}>
@@ -74,7 +76,7 @@ export default function MunicipalityTracking({ externalId }) {
             </div>
 
             <div className="bg-slate-50 p-4 rounded-2xl border border-slate-100 text-center">
-              <p className="text-sm text-slate-500">SMS updates aapke registered mobile par bheje ja rahe hain</p>
+              <p className="text-sm text-slate-500">{t("tracking.smsNote")}</p>
             </div>
           </div>
         )}

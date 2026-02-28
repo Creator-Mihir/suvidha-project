@@ -2,19 +2,31 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Shield, Eye, EyeOff, AlertCircle, Loader2 } from "lucide-react";
 import TopBar from "../components/TopBar";
-import { adminLogin } from "../services/authService";
+
+// Simple credentials map — no API needed
+const CREDENTIALS = {
+  dept_admin: [
+    { username: 'electric', password: 'electric@123', dept: 'electricity', name: 'Electricity Admin' },
+    { username: 'gas',      password: 'gas@123',      dept: 'gas',         name: 'Gas Admin' },
+    { username: 'water',    password: 'water@123',    dept: 'water',       name: 'Water Admin' },
+    { username: 'municipality', password: 'municipality@123', dept: 'municipality', name: 'Municipality Admin' },
+  ],
+  super_admin: [
+    { username: 'superadmin', password: 'superadmin@123', dept: 'super', name: 'Super Admin' },
+  ],
+};
 
 function AdminLogin() {
   const navigate = useNavigate();
 
-  const [username, setUsername]       = useState("");
-  const [password, setPassword]       = useState("");
-  const [role, setRole]               = useState("dept_admin");
+  const [username, setUsername]         = useState("");
+  const [password, setPassword]         = useState("");
+  const [role, setRole]                 = useState("dept_admin");
   const [showPassword, setShowPassword] = useState(false);
-  const [loading, setLoading]         = useState(false);
-  const [error, setError]             = useState("");
+  const [loading, setLoading]           = useState(false);
+  const [error, setError]               = useState("");
 
-  const handleLogin = async (e) => {
+  const handleLogin = (e) => {
     e.preventDefault();
     if (!username || !password) {
       setError("Please enter both Officer ID and Password.");
@@ -24,22 +36,38 @@ function AdminLogin() {
     setLoading(true);
     setError("");
 
-    try {
-      const response = await adminLogin(username, password, role);
+    setTimeout(() => {
+      const list = CREDENTIALS[role] || [];
+      const match = list.find(
+        c => c.username === username.trim() && c.password === password
+      );
 
-      if (response.success) {
-        // Redirect based on role
-        if (role === "super_admin") {
-          navigate("/super-admin/dashboard");
+      if (match) {
+        // Save admin session
+        localStorage.setItem('admin_token', `${match.dept}-admin-token`);
+        localStorage.setItem('admin_user', JSON.stringify({
+          name: match.name,
+          dept: match.dept,
+          role,
+        }));
+
+        // Navigate based on dept
+        if (role === 'super_admin') {
+          navigate('/admin/super');
         } else {
-          navigate("/admin/dashboard");
+          navigate(`/admin/${match.dept}`);
         }
+      } else {
+        setError("Invalid credentials. Please check and try again.");
       }
-    } catch (err) {
-      setError(err.response?.data?.message || "Invalid credentials. Please try again.");
-    } finally {
       setLoading(false);
-    }
+    }, 800);
+  };
+
+  // Hint text based on role
+  const getHint = () => {
+    if (role === 'super_admin') return 'superadmin / superadmin@123';
+    return 'electric / electric@123  |  gas / gas@123  |  water / water@123  |  municipality / municipality@123';
   };
 
   return (
@@ -51,34 +79,30 @@ function AdminLogin() {
 
           {/* Header */}
           <div className="text-center mb-8">
-            <h2 className="text-3xl font-bold text-[#0b3c5d]">
-              Officer Control Panel
-            </h2>
-            <p className="text-gray-500">Authorized Personnel Only</p>
+            <div className="w-14 h-14 bg-[#0b3c5d] rounded-full flex items-center justify-center mx-auto mb-4">
+              <Shield size={28} className="text-white" />
+            </div>
+            <h2 className="text-3xl font-bold text-[#0b3c5d]">Officer Control Panel</h2>
+            <p className="text-gray-500 text-sm mt-1">Authorized Personnel Only</p>
           </div>
 
           {/* Security badge */}
-          <div className="bg-[#0b3c5d] text-white p-4 rounded-lg mb-6 text-center">
+          <div className="bg-[#0b3c5d] text-white p-4 rounded-lg mb-6 text-center text-sm">
             🔒 Secure Government Access Portal
-            <div className="text-xs mt-1 opacity-80">
-              Smart City SUVIDHA Management System
-            </div>
+            <div className="text-xs mt-1 opacity-80">Smart City SUVIDHA Management System</div>
           </div>
 
           {/* Error */}
           {error && (
             <div className="flex items-center gap-2 p-3 mb-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-sm font-semibold">
-              <AlertCircle size={18} />
-              {error}
+              <AlertCircle size={18} /> {error}
             </div>
           )}
 
           <form onSubmit={handleLogin}>
 
-            {/* Role Selection */}
-            <label className="text-sm font-semibold text-gray-600">
-              Login As
-            </label>
+            {/* Role */}
+            <label className="text-sm font-semibold text-gray-600">Login As</label>
             <select
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -89,9 +113,7 @@ function AdminLogin() {
             </select>
 
             {/* Username */}
-            <label className="text-sm font-semibold text-gray-600">
-              Officer ID
-            </label>
+            <label className="text-sm font-semibold text-gray-600">Officer ID</label>
             <input
               type="text"
               value={username}
@@ -101,9 +123,7 @@ function AdminLogin() {
             />
 
             {/* Password */}
-            <label className="text-sm font-semibold text-gray-600">
-              Password
-            </label>
+            <label className="text-sm font-semibold text-gray-600">Password</label>
             <div className="relative mt-1 mb-6">
               <input
                 type={showPassword ? "text" : "password"}
@@ -112,21 +132,14 @@ function AdminLogin() {
                 placeholder="Enter Password"
                 className="w-full p-3 border rounded-lg focus:outline-none focus:border-[#0b3c5d] pr-12"
               />
-              <button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              >
+              <button type="button" onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
               </button>
             </div>
 
-            {/* Login Button */}
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full bg-[#0b3c5d] text-white py-3 rounded-lg text-lg hover:bg-[#092c44] shadow-lg disabled:opacity-50 flex items-center justify-center gap-2"
-            >
+            <button type="submit" disabled={loading}
+              className="w-full bg-[#0b3c5d] text-white py-3 rounded-lg text-lg hover:bg-[#092c44] shadow-lg disabled:opacity-50 flex items-center justify-center gap-2">
               {loading
                 ? <><Loader2 className="animate-spin" size={20} /> Verifying...</>
                 : "Access Control Panel →"
@@ -134,19 +147,19 @@ function AdminLogin() {
             </button>
           </form>
 
-          {/* Warning */}
-          <p className="text-xs text-red-500 mt-6 text-center">
+          {/* Hint */}
+          <div className="mt-5 bg-blue-50 border border-blue-100 rounded-lg p-3 text-xs text-blue-600 text-center">
+            💡 Demo: {getHint()}
+          </div>
+
+          <p className="text-xs text-red-500 mt-4 text-center">
             Unauthorized access is strictly prohibited and monitored.
           </p>
 
-          {/* Back to Kiosk */}
-          <button
-            onClick={() => navigate("/login")}
-            className="w-full mt-3 text-gray-400 text-sm hover:text-[#0b3c5d] transition-colors"
-          >
-            ← Back to Citizen Login
+          <button onClick={() => navigate("/login")}
+            className="w-full mt-3 text-gray-400 text-sm hover:text-[#0b3c5d] transition-colors">
+            Back to Citizen Login
           </button>
-
         </div>
       </div>
     </div>

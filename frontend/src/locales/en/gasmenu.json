@@ -1,0 +1,30 @@
+{
+    "gasMenu": {
+        "title": "Gas Service Center",
+        "subtitle": "Please select a service to proceed",
+        "bill": {
+            "title": "Pay Gas Bill",
+            "desc": "Online payments & digital receipts"
+        },
+        "new": {
+            "title": "New Connection",
+            "desc": "Apply for Domestic or Commercial lines"
+        },
+        "cylinder": {
+            "title": "Book Cylinder",
+            "desc": "Instant booking & delivery tracking"
+        },
+        "usage": {
+            "title": "Consumption",
+            "desc": "Check monthly gas usage history"
+        },
+        "complaint": {
+            "title": "Register Complaint",
+            "desc": "Leakage, pressure, or billing issues"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check request or complaint progress"
+        }
+    }
+}

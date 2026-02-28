@@ -1,21 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Zap, FileText, Download, AlertTriangle, RefreshCw, Check, Loader2 } from 'lucide-react';
 import { getBill, getSavedConnections } from '../../services/electricityService';
 import PaymentModal from '../Payment/PaymentModal';
 
 export default function BillPayment({ billStep, setBillStep, connId, setConnId, setView, simulateSuccess }) {
-  const [showGraph, setShowGraph]         = useState(false);
-  const [billData, setBillData]           = useState(null);
-  const [savedConns, setSavedConns]       = useState([]);
-  const [loading, setLoading]             = useState(false);
-  const [payModal, setPayModal]           = useState(false);
-  const [error, setError]                 = useState('');
+  const [showGraph, setShowGraph] = useState(false);
+  const { t } = useTranslation(["electricity", "common"]);
+  const [billData, setBillData] = useState(null);
+  const [savedConns, setSavedConns] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [payModal, setPayModal] = useState(false);
+  const [error, setError] = useState('');
 
   // Load saved connections on mount
   useEffect(() => {
     getSavedConnections()
       .then(res => setSavedConns(res.data?.connections || []))
-      .catch(() => {});
+      .catch(() => { });
   }, []);
 
   const handleKeypad = (val) => {
@@ -26,7 +28,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
 
   const handleProceed = async () => {
     if (connId.length < 4) {
-      setError('Please enter a valid connection ID');
+      setError(t("billPayment.invalidConnection"));
       return;
     }
     setLoading(true);
@@ -57,8 +59,6 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
     }
   };
 
-  // Payment handled by PaymentModal
-
   // ── Step 1: Connection ID Input ──
   if (billStep === 'id-input') {
     return (
@@ -68,8 +68,8 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             <ArrowLeft size={24} />
           </button>
           <div className="text-center mb-10">
-            <h2 className="text-3xl font-extrabold text-slate-800 mb-2">Enter Connection ID</h2>
-            <p className="text-slate-500">Connection number dalein ya neeche se chunein</p>
+            <h2 className="text-3xl font-extrabold text-slate-800 mb-2">{t("billPayment.enterConnection")}</h2>
+            <p className="text-slate-500">{t("billPayment.enterSubtitle")}</p>
           </div>
 
           {error && (
@@ -86,7 +86,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
                 </span>
               </div>
               <div className="grid grid-cols-3 gap-4">
-                {[1,2,3,4,5,6,7,8,9].map(n => (
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(n => (
                   <button key={n} onClick={() => handleKeypad(n.toString())}
                     className="p-4 bg-white border border-slate-100 rounded-xl font-bold text-xl shadow-sm hover:bg-slate-50 active:scale-95 transition-all">
                     {n}
@@ -100,13 +100,12 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
                 onClick={handleProceed}
                 disabled={connId.length < 4 || loading}
                 className="w-full bg-blue-600 text-white mt-8 py-4 rounded-2xl font-bold text-xl shadow-lg hover:bg-blue-700 active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
-                {loading ? <><Loader2 className="animate-spin" size={22} /> Fetching Bill...</> : 'Proceed'}
+                {loading ? <><Loader2 className="animate-spin" size={22} /> {t("billPayment.fetching")}</> : t("billPayment.proceed")}
               </button>
             </div>
 
-            {/* Saved Connections */}
             <div className="space-y-4">
-              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">Saved Connections</h3>
+              <h3 className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-4">{t("billPayment.savedConnections")}</h3>
               {savedConns.map((conn, i) => (
                 <div
                   key={i}
@@ -130,10 +129,10 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
     <div className="max-w-6xl mx-auto w-full animate-in slide-in-from-right duration-500">
       <header className="mb-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <button onClick={() => setBillStep('id-input')} className="text-slate-400 hover:text-slate-600 p-2 flex items-center gap-2">
-          <ArrowLeft size={20} /> Back
+          <ArrowLeft size={20} /> {t("billPayment.back")}
         </button>
         <div className="flex-grow">
-          <h1 className="text-3xl font-bold text-slate-800">PowerGrid Services</h1>
+          <h1 className="text-3xl font-bold text-slate-800">{t("billPayment.serviceTitle")}</h1>
           <div className="flex items-center gap-2 mt-1">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
             <p className="text-slate-500 text-sm">Consumer ID: {connId} • {billData?.connectionType || 'Domestic'} Connection</p>
@@ -151,7 +150,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
         <div className="lg:col-span-2 space-y-6">
           <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="space-y-4">
-              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">Consumer Details</h2>
+              <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest">{t("billPayment.consumerDetails")}</h2>
               <div>
                 <p className="text-xl font-bold text-slate-800">{billData?.consumerName || 'Loading...'}</p>
                 <p className="text-slate-500">{billData?.address}</p>
@@ -163,7 +162,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             </div>
             <div className="bg-slate-900 p-6 rounded-2xl text-white flex flex-col justify-between">
               <div>
-                <p className="text-xs text-slate-400 uppercase mb-1">Payable Amount</p>
+                <p className="text-xs text-slate-400 uppercase mb-1">{t("billPayment.payableAmount")}</p>
                 <p className="text-4xl font-bold">₹{billData?.amount?.toLocaleString()}</p>
               </div>
               <div className="pt-4 border-t border-slate-700 space-y-2">
@@ -179,10 +178,9 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             </div>
           </div>
 
-          {/* Breakdown */}
           <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
             <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2">
-              <FileText size={18} className="text-blue-500" /> Detailed Charges Breakdown
+              <FileText size={18} className="text-blue-500" /> {t("billPayment.breakdown")}
             </h3>
             <div className="space-y-3">
               <div className="flex justify-between text-sm py-2 border-b border-slate-50">
@@ -204,11 +202,10 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             </div>
           </div>
 
-          {/* Usage Graph */}
           <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
             <div className="flex justify-between items-center mb-6">
               <div>
-                <h2 className="text-xl font-bold text-slate-800">Usage Analytics</h2>
+                <h2 className="text-xl font-bold text-slate-800">{t("billPayment.usageAnalytics")}</h2>
                 <p className="text-slate-500 text-sm">kWh trends</p>
               </div>
               <button onClick={() => setShowGraph(true)} className="text-blue-600 font-semibold flex items-center gap-1 text-sm">
@@ -229,7 +226,6 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
           </div>
         </div>
 
-        {/* Right sidebar */}
         <div className="space-y-6">
           <div className="bg-blue-600 rounded-[2rem] p-6 text-white shadow-lg">
             <div className="bg-blue-500/50 w-10 h-10 rounded-lg flex items-center justify-center mb-4"><Zap size={20} /></div>
@@ -237,9 +233,8 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             <p className="text-blue-100 text-sm leading-relaxed">Your usage peaked between 7 PM - 10 PM. Shift heavy appliance use to morning hours to save up to 20%.</p>
           </div>
 
-          {/* Payment History */}
           <div className="bg-white p-6 rounded-[2rem] shadow-sm border border-slate-100">
-            <h3 className="font-bold text-slate-800 mb-4">Payment History</h3>
+            <h3 className="font-bold text-slate-800 mb-4">{t("billPayment.paymentHistory")}</h3>
             <div className="space-y-4">
               {(billData?.paymentHistory || []).map((item, i) => (
                 <div key={i} className="flex justify-between items-center">
@@ -261,11 +256,11 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
           <div className="grid grid-cols-2 gap-3">
             <button className="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 rounded-2xl hover:shadow-md transition-shadow">
               <Download size={20} className="text-slate-600 mb-2" />
-              <span className="text-[10px] font-bold text-slate-600">Download Bill</span>
+              <span className="text-[10px] font-bold text-slate-600">{t("billPayment.downloadBill")}</span>
             </button>
             <button onClick={() => setView('complaints')} className="flex flex-col items-center justify-center p-4 bg-white border border-slate-200 rounded-2xl hover:shadow-md transition-shadow">
               <AlertTriangle size={20} className="text-slate-600 mb-2" />
-              <span className="text-[10px] font-bold text-slate-600">Raise Dispute</span>
+              <span className="text-[10px] font-bold text-slate-600">{t("billPayment.raiseDispute")}</span>
             </button>
           </div>
 
@@ -273,7 +268,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
             onClick={() => setPayModal(true)}
             disabled={!billData}
             className="w-full bg-green-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg hover:bg-green-700 active:scale-95 transition-all disabled:opacity-50">
-            Pay ₹{billData?.amount?.toLocaleString() || '...'}
+            {t("billPayment.pay")} ₹{billData?.amount?.toLocaleString() || '...'}
           </button>
 
           <PaymentModal

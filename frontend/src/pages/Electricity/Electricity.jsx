@@ -34,6 +34,7 @@ export default function Electricity() {
     <div className="min-h-screen flex flex-col bg-[#f8fafc] font-sans text-slate-800">
       <TopBar />
 
+       
       <main className="flex-1 p-6 w-full flex flex-col items-center">
         {view === "menu" && (
           <ElectricityMenu setView={setView} setBillStep={setBillStep} />

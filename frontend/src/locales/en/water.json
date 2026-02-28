@@ -1,0 +1,70 @@
+{
+    "menu": {
+        "title": "Water Services",
+        "subtitle": "Please choose an option according to your need",
+        "billPayment": {
+            "title": "Pay Water Bill",
+            "desc": "Pay your water bill online"
+        },
+        "newConnection": {
+            "title": "New Connection",
+            "desc": "Apply for a new water connection"
+        },
+        "complaints": {
+            "title": "Complaints",
+            "desc": "Register leakage or billing complaints"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check your application status"
+        }
+    },
+    "bill": {
+        "title": "Water Bill Payment",
+        "subtitle": "Manage and pay your water utility bills",
+        "connectionId": "Connection ID",
+        "fetching": "Retrieving bill details...",
+        "amount": "Outstanding Amount",
+        "due": "DUE",
+        "period": "Billing Period",
+        "details": "Consumer Details",
+        "name": "Name",
+        "address": "Address",
+        "prevReading": "Prev Reading",
+        "currReading": "Curr Reading",
+        "units": "Units Used",
+        "fixed": "Fixed",
+        "variable": "Variable",
+        "taxes": "Taxes",
+        "pay": "Pay Bill"
+    },
+    "idInput": {
+        "title": "Enter Connection ID",
+        "subtitle": "Enter connection number or select from below",
+        "saved": "Saved Connections"
+    },
+    "new": {
+        "title": "Fresh Water Connection",
+        "subtitle": "Apply for residential water supply",
+        "fullName": "Applicant Name",
+        "mobile": "Mobile Number",
+        "address": "Premises Address",
+        "requiredDocs": "Required Documents",
+        "docs": {
+            "aadhar": "Aadhar Card",
+            "propertyTax": "Property Tax"
+        },
+        "reqs": {
+            "aadhar": "Aadhar Card Copy",
+            "ownership": "Ownership Proof",
+            "photo": "Photograph",
+            "fee": "Application Fee: ₹500"
+        },
+        "submit": "Apply Now"
+    },
+    "tracking": {
+        "title": "Water Service Tracker",
+        "refId": "Reference Number",
+        "track": "Track Request"
+    }
+}

@@ -6,7 +6,7 @@
     },
     "services": {
       "electricity": {
-        "title": "Electricity Bill Payment",
+        "title": "Electricity service",
         "desc": "Pay bills, check usage & download receipt"
       },
       "water": {

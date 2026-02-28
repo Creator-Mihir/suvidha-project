@@ -1,0 +1,97 @@
+{
+    "menu": {
+        "title": "Gas Service Center",
+        "subtitle": "Please select a service to proceed",
+        "bill": {
+            "title": "Pay Gas Bill",
+            "desc": "Online payments & digital receipts"
+        },
+        "new": {
+            "title": "New Connection",
+            "desc": "Apply for Domestic or Commercial lines"
+        },
+        "cylinder": {
+            "title": "Book Cylinder",
+            "desc": "Instant booking & delivery tracking"
+        },
+        "usage": {
+            "title": "Consumption",
+            "desc": "Check monthly gas usage history"
+        },
+        "complaint": {
+            "title": "Register Complaint",
+            "desc": "Leakage, pressure, or billing issues"
+        },
+        "tracking": {
+            "title": "Track Status",
+            "desc": "Check request or complaint progress"
+        }
+    },
+    "bill": {
+        "title": "Gas Bill Payment",
+        "subtitle": "Securely pay your monthly gas charges",
+        "selectConsumer": "Select Consumer",
+        "consumerNo": "Consumer Number",
+        "outstanding": "Outstanding Amount",
+        "amount": "Bill Amount",
+        "dueDate": "Due Date",
+        "payNow": "Pay Now",
+        "pay": "Pay Bill"
+    },
+    "cylinder": {
+        "title": "Book a Cylinder",
+        "subtitle": "Refill your gas cylinder instantly",
+        "bookRefill": "Book a Refill",
+        "selectConnection": "Select Connection",
+        "selectSize": "Select Cylinder Size",
+        "standard": "14.2 kg (Domestic)",
+        "commercial": "19 kg (Commercial)",
+        "price": "Market Price",
+        "subsidy": "Subsidy Amount",
+        "address": "Delivery Address",
+        "confirm": "Confirm Booking",
+        "history": "Recent Bookings"
+    },
+    "newConnection": {
+        "title": "New Gas Connection",
+        "subtitle": "Registration for piped gas or cylinder",
+        "fullName": "Full Name",
+        "mobile": "Mobile Number",
+        "type": "Connection Type",
+        "idProof": "ID Proof Number",
+        "address": "Delivery Address",
+        "piped": "Piped Natural Gas (PNG)",
+        "bottled": "Liquefied Petroleum Gas (LPG)",
+        "submit": "Submit Registration"
+    },
+    "consumption": {
+        "title": "Consumption Analytics",
+        "currentUsage": "Current Usage (SCM)",
+        "prevMonth": "Previous Month",
+        "efficiency": "Efficiency Rating",
+        "efficiencyGood": "Good",
+        "efficiencyNote": "Your usage is consistent with residential averages. Ensure burners are cleaned for blue flame efficiency."
+    },
+    "tracking": {
+        "title": "Order & Service Tracker",
+        "orderId": "Order/Application ID",
+        "status": "Current Status",
+        "track": "Track Now",
+        "notFound": "Could not find this reference ID."
+    },
+    "complaint": {
+        "title": "Register Complaint",
+        "selectConnection": "Select Connection",
+        "category": "Complaint Category",
+        "selectCategory": "Select Category",
+        "description": "Description",
+        "submit": "Submit Complaint",
+        "fillAll": "Please fill all fields.",
+        "categories": {
+            "leakage": "Gas Leakage (Critical)",
+            "pressure": "Low Gas Pressure",
+            "billing": "Incorrect Bill Amount",
+            "delay": "Delay in Delivery"
+        }
+    }
+}

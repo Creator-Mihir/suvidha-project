@@ -125,7 +125,7 @@ function Welcome() {
             }}
               className="w-full mt-8 bg-slate-900 text-white py-5 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 hover:bg-slate-800 hover:shadow-xl transition-all active:scale-[0.98]"
             >
-              Continue / आगे बढ़ें <ArrowRight size={20} />
+             Select language to continue / आगे बढ़ने के लिए भाषा चुनें <ArrowRight size={20} />
             </button>
 
           </div>

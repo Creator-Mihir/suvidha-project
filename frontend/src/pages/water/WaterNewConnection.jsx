@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { Check, FileText, Home, Loader2, AlertCircle } from 'lucide-react';
 import { applyWaterConnection } from '../../services/waterService';
 
 export default function WaterNewConnection({ handleProcessSimulation }) {
+  const { t } = useTranslation(["water", "common"]);
   const [form, setForm] = useState({ applicantName: '', mobile: '', address: '' });
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState('');
+  const [error, setError] = useState('');
 
   const handleChange = (field, value) => { setForm(p => ({ ...p, [field]: value })); setError(''); };
 
@@ -36,8 +38,8 @@ export default function WaterNewConnection({ handleProcessSimulation }) {
           <Home size={32} />
         </div>
         <div>
-          <h2 className="text-3xl font-bold">New Connection Application</h2>
-          <p className="text-slate-500">Naye connection ke liye apply karein</p>
+          <h2 className="text-3xl font-bold">{t("new.title")}</h2>
+          <p className="text-slate-500">{t("new.subtitle")}</p>
         </div>
       </div>
 
@@ -51,14 +53,14 @@ export default function WaterNewConnection({ handleProcessSimulation }) {
         <div className="md:col-span-2 space-y-6">
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-bold text-slate-400 ml-2">Applicant Name *</label>
+              <label className="text-xs font-bold text-slate-400 ml-2">{t("new.fullName")} *</label>
               <input type="text" value={form.applicantName}
                 onChange={(e) => handleChange('applicantName', e.target.value)}
                 className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-blue-500"
-                placeholder="Full Name" />
+                placeholder={t("new.fullName")} />
             </div>
             <div>
-              <label className="text-xs font-bold text-slate-400 ml-2">Mobile Number</label>
+              <label className="text-xs font-bold text-slate-400 ml-2">{t("new.mobile")}</label>
               <input type="text" value={form.mobile}
                 onChange={(e) => handleChange('mobile', e.target.value)}
                 className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-blue-500"
@@ -66,39 +68,39 @@ export default function WaterNewConnection({ handleProcessSimulation }) {
             </div>
           </div>
           <div>
-            <label className="text-xs font-bold text-slate-400 ml-2">Full Address *</label>
+            <label className="text-xs font-bold text-slate-400 ml-2">{t("new.address")} *</label>
             <textarea value={form.address}
               onChange={(e) => handleChange('address', e.target.value)}
               className="w-full p-4 h-24 bg-slate-50 border border-slate-200 rounded-2xl outline-none focus:border-blue-500"
-              placeholder="Plot No, Street, Landmark..." />
+              placeholder={t("new.address")} />
           </div>
 
           <div className="flex gap-4">
             <button className="flex-1 p-6 bg-slate-50 border-2 border-dashed border-slate-300 rounded-3xl text-center hover:bg-slate-100">
               <FileText className="mx-auto mb-2 text-slate-400" size={32} />
-              <p className="text-xs font-bold">Aadhar Card</p>
-              <p className="text-[10px] text-blue-600 underline mt-1">Scan Here</p>
+              <p className="text-xs font-bold">{t("new.docs.aadhar")}</p>
+              <p className="text-[10px] text-blue-600 underline mt-1">{t("common:scanHere")}</p>
             </button>
             <button className="flex-1 p-6 bg-slate-50 border-2 border-dashed border-slate-300 rounded-3xl text-center hover:bg-slate-100">
               <Home className="mx-auto mb-2 text-slate-400" size={32} />
-              <p className="text-xs font-bold">Property Tax</p>
-              <p className="text-[10px] text-blue-600 underline mt-1">Scan Here</p>
+              <p className="text-xs font-bold">{t("new.docs.propertyTax")}</p>
+              <p className="text-[10px] text-blue-600 underline mt-1">{t("common:scanHere")}</p>
             </button>
           </div>
 
           <button onClick={handleSubmit} disabled={loading}
             className="w-full py-6 bg-green-600 text-white rounded-3xl font-bold text-2xl shadow-xl hover:bg-green-700 active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
-            {loading ? <><Loader2 className="animate-spin" size={24} /> Submitting...</> : 'Submit Application'}
+            {loading ? <><Loader2 className="animate-spin" size={24} /> {t("common:processing")}</> : t("new.submit")}
           </button>
         </div>
 
         <div className="bg-green-50 p-8 rounded-[40px] h-fit">
-          <h4 className="font-bold text-green-800 mb-4">Required Documents:</h4>
+          <h4 className="font-bold text-green-800 mb-4">{t("new.requiredDocs")}:</h4>
           <ul className="space-y-4 text-sm text-green-700">
-            <li className="flex gap-2"><Check size={16} /> Aadhar Card Copy</li>
-            <li className="flex gap-2"><Check size={16} /> Ownership Proof</li>
-            <li className="flex gap-2"><Check size={16} /> Photograph</li>
-            <li className="flex gap-2"><Check size={16} /> Application Fee: ₹500</li>
+            <li className="flex gap-2"><Check size={16} /> {t("new.reqs.aadhar")}</li>
+            <li className="flex gap-2"><Check size={16} /> {t("new.reqs.ownership")}</li>
+            <li className="flex gap-2"><Check size={16} /> {t("new.reqs.photo")}</li>
+            <li className="flex gap-2"><Check size={16} /> {t("new.reqs.fee")}</li>
           </ul>
         </div>
       </div>

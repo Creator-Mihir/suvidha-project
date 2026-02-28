@@ -1,14 +1,16 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Loader2 } from 'lucide-react';
 import { getGasConnections } from '../../services/gasService';
 import PaymentModal from '../Payment/PaymentModal';
 
 export default function GasBillPayment({ setView, simulateSuccess }) {
+  const { t } = useTranslation(["gas", "common"]);
   const [connections, setConnections] = useState([]);
-  const [selected, setSelected]       = useState(0);
-  const [loading, setLoading]         = useState(true);
-  const [error, setError]             = useState('');
-  const [payModal, setPayModal]       = useState(false);
+  const [selected, setSelected] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState('');
+  const [payModal, setPayModal] = useState(false);
 
   useEffect(() => {
     getGasConnections()
@@ -27,10 +29,10 @@ export default function GasBillPayment({ setView, simulateSuccess }) {
   return (
     <div className="max-w-4xl mx-auto w-full">
       <button onClick={() => setView('menu')} className="text-orange-600 font-bold mb-6 flex items-center gap-2">
-        <ArrowLeft size={18} /> Back
+        <ArrowLeft size={18} /> {t("common:back")}
       </button>
       <div className="bg-white p-8 md:p-12 rounded-[3rem] shadow-xl border border-gray-100">
-        <h2 className="text-3xl font-black text-slate-800 mb-8">Pay Your Gas Bill</h2>
+        <h2 className="text-3xl font-black text-slate-800 mb-8">{t("bill.title")}</h2>
 
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-600 rounded-xl p-3 mb-4 text-sm font-semibold text-center">
@@ -41,13 +43,13 @@ export default function GasBillPayment({ setView, simulateSuccess }) {
         {loading ? (
           <div className="flex items-center justify-center py-16 gap-3 text-slate-400">
             <Loader2 className="animate-spin" size={24} />
-            <span className="font-semibold">Loading your connections...</span>
+            <span className="font-semibold">{t("common:processing")}</span>
           </div>
         ) : (
           <div className="space-y-6">
             <div>
               <label className="text-xs font-bold text-slate-500 uppercase tracking-wider block mb-2">
-                Select Consumer Account
+                {t("bill.selectConsumer")}
               </label>
               <select
                 className="w-full p-4 bg-gray-50 rounded-2xl outline-none font-bold border border-gray-200"
@@ -63,12 +65,12 @@ export default function GasBillPayment({ setView, simulateSuccess }) {
             {conn && (
               <div className="bg-gradient-to-r from-orange-600 to-orange-400 p-6 rounded-3xl text-white flex justify-between items-center shadow-lg">
                 <div>
-                  <p className="text-[10px] font-bold uppercase opacity-80">Outstanding Balance</p>
+                  <p className="text-[10px] font-bold uppercase opacity-80">{t("bill.outstanding")}</p>
                   <p className="text-4xl font-black mt-1">₹{conn.amount?.toLocaleString()}.00</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-[10px] font-bold uppercase opacity-80">Due Date</p>
-                  <p className="text-lg font-bold">19 Mar, 2026</p>
+                  <p className="text-[10px] font-bold uppercase opacity-80">{t("bill.dueDate")}</p>
+                  <p className="text-lg font-bold">{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</p>
                 </div>
               </div>
             )}
@@ -78,7 +80,7 @@ export default function GasBillPayment({ setView, simulateSuccess }) {
               disabled={!conn}
               className="w-full bg-orange-600 text-white py-5 rounded-2xl font-black shadow-xl hover:bg-orange-700 active:scale-[0.98] transition-all disabled:opacity-50"
             >
-              Pay ₹{conn?.amount?.toLocaleString() || '...'}
+              {t("bill.pay")} ₹{conn?.amount?.toLocaleString() || '...'}
             </button>
           </div>
         )}

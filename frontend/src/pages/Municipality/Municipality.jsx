@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Check, ArrowLeft } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import TopBar from '../../components/TopBar';
 
 import MunicipalityMenu from './MunicipalityMenu';
@@ -11,6 +12,7 @@ import TradeLicense from './TradeLicense';
 import MunicipalityTracking from './MunicipalityTracking';
 
 export default function Municipality() {
+  const { t } = useTranslation(["municipality", "common"]);
   const [view, setView] = useState('menu');
   const [modal, setModal] = useState(null);
   const [refId, setRefId] = useState('');
@@ -37,7 +39,7 @@ export default function Municipality() {
               onClick={() => setView('menu')}
               className="flex items-center gap-2 text-purple-600 font-bold text-lg hover:-translate-x-1 transition-transform"
             >
-              <ArrowLeft size={22} /> Back to Menu
+              <ArrowLeft size={22} /> {t("common:backToMenu")}
             </button>
           </div>
         )}
@@ -87,14 +89,14 @@ export default function Municipality() {
                 }}
                 className="w-full bg-purple-700 text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-purple-800"
               >
-                Track Status
+                {t("common:trackStatus")}
               </button>
 
               <button
                 onClick={closeModal}
                 className="w-full text-slate-500 font-bold py-2 hover:text-slate-700"
               >
-                Back to Menu
+                {t("common:backToMenu")}
               </button>
             </div>
           </div>

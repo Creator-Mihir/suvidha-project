@@ -10,6 +10,11 @@ import GasServicesKiosk from "./pages/gas/Gas";
 import SuvidhaAI from './components/KioskUI/SuvidhaAI';
 import Municipality from "./pages/Municipality/Municipality";
 import WelcomeSetup from "./pages/WelcomeSetup";
+ import ElectricityAdmin  from './pages/Admin/ElectricityAdmin';
+ import GasAdmin          from './pages/Admin/GasAdmin';
+ import MunicipalityAdmin from './pages/Admin/MunicipalityAdmin';
+import SuperAdmin        from './pages/Admin/SuperAdmin';
+
 
 function App() {
   return (
@@ -24,7 +29,11 @@ function App() {
        <Route path="/municipality" element={<Municipality />} />
        <Route path="/Adminlogin" element={<AdminLogin />} />
        <Route path="/welcome-setup" element={<WelcomeSetup />} />
-
+       <Route path="/admin/electricity"  element={<ElectricityAdmin />} />
+         <Route path="/admin/gas"          element={<GasAdmin />} />
+      
+        <Route path="/admin/municipality" element={<MunicipalityAdmin />} /> 
+        <Route path="/admin/super"        element={<SuperAdmin />} />
         <Route path="/admin/dashboard" element={<AdminDashboard />} />
         <Route path="/electricity" element={<Electricity />} />
       </Routes>

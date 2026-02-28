@@ -1,15 +1,17 @@
 import { useState } from 'react';
+import { useTranslation } from "react-i18next";
 import { ArrowLeft, Loader2, AlertCircle } from 'lucide-react';
 import { applyNewConnection } from '../../services/electricityService';
 
 
 export default function NewConnection({ setView, simulateSuccess }) {
+  const { t } = useTranslation(["electricity", "common"]);
   const [form, setForm] = useState({
     fullName: '', fatherName: '', mobile: '',
     dob: '', address: '', connectionType: 'Domestic (Home)', load: '3 kW',
   });
   const [loading, setLoading] = useState(false);
-  const [error, setError]     = useState('');
+  const [error, setError] = useState('');
 
   const handleChange = (field, value) => {
     setForm(prev => ({ ...prev, [field]: value }));
@@ -37,12 +39,12 @@ export default function NewConnection({ setView, simulateSuccess }) {
   return (
     <div className="max-w-4xl mx-auto pb-12 w-full animate-in slide-in-from-bottom duration-500">
       <button onClick={() => setView('menu')} className="flex items-center gap-2 text-blue-900 font-bold mb-6 hover:underline">
-        <ArrowLeft size={20} /> Back
+        <ArrowLeft size={20} /> {t("common:back")}
       </button>
       <div className="bg-white p-8 md:p-12 rounded-[2.5rem] shadow-xl border border-gray-100">
         <div className="mb-10">
-          <h2 className="text-3xl font-black text-slate-800">New Connection Application</h2>
-          <p className="text-slate-500 mt-2">Fill in the details to apply for a new electricity connection</p>
+          <h2 className="text-3xl font-black text-slate-800">{t("newConnection.title")}</h2>
+          <p className="text-slate-500 mt-2">{t("newConnection.subtitle")}</p>
         </div>
 
         {error && (
@@ -56,11 +58,11 @@ export default function NewConnection({ setView, simulateSuccess }) {
           <div>
             <h4 className="text-blue-600 font-bold mb-6 flex items-center gap-2 uppercase text-xs tracking-wider">
               <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs">1</span>
-              Applicant Details
+              {t("newConnection.applicantName")}
             </h4>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <input
-                type="text" placeholder="Full Name" required
+                type="text" placeholder={t("newConnection.applicantName")} required
                 value={form.fullName}
                 onChange={(e) => handleChange('fullName', e.target.value)}
                 className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-blue-500"
@@ -90,11 +92,11 @@ export default function NewConnection({ setView, simulateSuccess }) {
           <div>
             <h4 className="text-blue-600 font-bold mb-6 flex items-center gap-2 uppercase text-xs tracking-wider">
               <span className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center text-xs">2</span>
-              Address & Load
+              {t("newConnection.address")} & {t("newConnection.loadRequired")}
             </h4>
             <div className="space-y-6">
               <textarea
-                placeholder="Service Address" rows="3" required
+                placeholder={t("newConnection.address")} rows="3" required
                 value={form.address}
                 onChange={(e) => handleChange('address', e.target.value)}
                 className="w-full p-4 bg-gray-50 border border-gray-200 rounded-xl outline-none focus:border-blue-500"
@@ -128,8 +130,8 @@ export default function NewConnection({ setView, simulateSuccess }) {
               disabled={loading}
               className="w-full bg-green-600 text-white py-5 rounded-2xl font-bold shadow-xl hover:bg-green-700 active:scale-95 transition-all disabled:opacity-50 flex items-center justify-center gap-2">
               {loading
-                ? <><Loader2 className="animate-spin" size={22} /> Submitting...</>
-                : 'Submit Application'
+                ? <><Loader2 className="animate-spin" size={22} /> {t("common:processing")}</>
+                : t("newConnection.submit")
               }
             </button>
           </div>

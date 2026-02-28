@@ -1,13 +1,14 @@
 import { useState } from 'react';
-import { Check, Smartphone, CreditCard } from 'lucide-react';
+import { Check, Smartphone, CreditCard, ArrowLeft, Wrench, Activity } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import TopBar from '../../components/TopBar';
 import WaterMenu from './WaterMenu';
 import WaterIdInput from './WaterIdInput';
 import WaterBill from './WaterBill';
 import WaterNewConnection from './WaterNewConnection';
-import { ArrowLeft, Wrench, Activity } from 'lucide-react';
 
 export default function Water() {
+  const { t } = useTranslation(["water", "common"]);
   const [view, setView] = useState('home');
   const [connId, setConnId] = useState('');
   const [modal, setModal] = useState(null);
@@ -42,8 +43,8 @@ export default function Water() {
         {view === 'home' ? (
           <>
             <div className="text-center mb-12">
-              <h2 className="text-4xl font-bold text-slate-800 mb-2">Water Services</h2>
-              <p className="text-lg text-slate-500">Kripya apni zarurat ke hisab se option chunein</p>
+              <h2 className="text-4xl font-bold text-slate-800 mb-2">{t("menu.title")}</h2>
+              <p className="text-lg text-slate-500">{t("menu.subtitle")}</p>
             </div>
             <WaterMenu setView={setView} />
           </>
@@ -57,7 +58,7 @@ export default function Water() {
                 }}
                 className="flex items-center gap-2 text-blue-600 font-bold text-lg hover:-translate-x-1 transition-transform"
               >
-                <ArrowLeft size={24} /> Back to Menu
+                <ArrowLeft size={24} /> {t("common:backToMenu")}
               </button>
             </div>
 
@@ -98,14 +99,16 @@ export default function Water() {
       {modal === 'payment' && (
         <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-6">
           <div className="bg-white rounded-[50px] w-full max-w-xl p-10 shadow-2xl">
-            <h3 className="text-3xl font-bold mb-8 text-center">Payment Method</h3>
+            <h3 className="text-3xl font-bold mb-8 text-center">{t("common:paymentMethod")}</h3>
             <div className="grid grid-cols-1 gap-4">
               <button
                 onClick={() => handleProcessSimulation('Payment Success', 'Transaction ID: TXN99821-OK')}
                 className="p-8 bg-blue-50 rounded-3xl flex items-center justify-between font-bold text-xl active:scale-95 transition-all hover:bg-blue-100"
               >
                 <span>Scan UPI QR</span>
-                <Smartphone size={32} />
+                <div className="flex gap-4">
+                  <Smartphone size={32} />
+                </div>
               </button>
               <button
                 onClick={() => handleProcessSimulation('Payment Success', 'Transaction ID: TXN44321-CC')}
@@ -116,7 +119,7 @@ export default function Water() {
               </button>
             </div>
             <button onClick={() => setModal(null)} className="w-full mt-6 py-4 text-gray-400 font-bold hover:text-gray-600">
-              Cancel
+              {t("common:cancel")}
             </button>
           </div>
         </div>
@@ -126,14 +129,14 @@ export default function Water() {
       {modal === 'loading' && (
         <div className="fixed inset-0 bg-blue-600 z-[100] flex flex-col items-center justify-center text-white">
           <div className="w-20 h-20 border-8 border-white/20 border-t-white rounded-full animate-spin mb-8"></div>
-          <h2 className="text-3xl font-bold">Processing Request...</h2>
+          <h2 className="text-3xl font-bold">{t("common:processing")}...</h2>
           <p className="opacity-80">Kripya thoda intezar karein</p>
         </div>
       )}
 
       {/* Success */}
       {modal === 'success' && (
-        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[110] flex items-center justify-center p-6">
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-110 flex items-center justify-center p-6">
           <div className="bg-white rounded-[50px] w-full max-w-md p-10 text-center shadow-2xl">
             <div className="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8">
               <Check size={48} />
@@ -144,7 +147,7 @@ export default function Water() {
               onClick={() => { setModal(null); setView('home'); setConnId(''); }}
               className="w-full py-6 bg-blue-600 text-white rounded-3xl font-bold text-xl shadow-lg hover:bg-blue-700"
             >
-              Back to Home
+              {t("common:backToMenu")}
             </button>
           </div>
         </div>

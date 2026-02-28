@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
+import { useTranslation } from "react-i18next";
 import { Loader2 } from 'lucide-react';
 import { getWaterConnections } from '../../services/waterService';
 
 const Numpad = ({ onInput, onClear, onDelete }) => {
-  const keys = ['1','2','3','4','5','6','7','8','9','C','0','DEL'];
+  const keys = ['1', '2', '3', '4', '5', '6', '7', '8', '9', 'C', '0', 'DEL'];
   return (
     <div className="grid grid-cols-3 gap-3">
       {keys.map(key => (
@@ -12,7 +13,7 @@ const Numpad = ({ onInput, onClear, onDelete }) => {
           className={`py-6 rounded-2xl text-2xl font-bold transition-all border border-slate-200
             ${key === 'C' ? 'text-red-500 bg-white hover:bg-red-50' :
               key === 'DEL' ? 'text-orange-500 bg-white hover:bg-orange-50' :
-              'bg-white hover:bg-slate-50 text-slate-800'}
+                'bg-white hover:bg-slate-50 text-slate-800'}
             active:scale-95 shadow-sm`}>
           {key}
         </button>
@@ -22,13 +23,14 @@ const Numpad = ({ onInput, onClear, onDelete }) => {
 };
 
 export default function WaterIdInput({ connId, setConnId, setView, handleNumpadInput, formatId }) {
+  const { t } = useTranslation(["water", "common"]);
   const [savedConns, setSavedConns] = useState([]);
   const [loadingConns, setLoadingConns] = useState(true);
 
   useEffect(() => {
     getWaterConnections()
       .then(res => setSavedConns(res.data?.connections || []))
-      .catch(() => {})
+      .catch(() => { })
       .finally(() => setLoadingConns(false));
   }, []);
 
@@ -40,8 +42,8 @@ export default function WaterIdInput({ connId, setConnId, setView, handleNumpadI
   return (
     <div className="bg-white p-10 rounded-[40px] shadow-lg max-w-5xl mx-auto w-full">
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-bold text-slate-800">Enter Connection ID</h2>
-        <p className="text-slate-500">Connection number dalein ya neeche se chunein</p>
+        <h2 className="text-3xl font-bold text-slate-800">{t("idInput.title")}</h2>
+        <p className="text-slate-500">{t("idInput.subtitle")}</p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
@@ -57,15 +59,15 @@ export default function WaterIdInput({ connId, setConnId, setView, handleNumpadI
             onClick={() => connId.length >= 10 && setView('bill')}
             disabled={connId.length < 10}
             className="w-full py-6 bg-blue-600 text-white rounded-3xl font-bold text-2xl shadow-xl active:scale-95 transition-transform disabled:opacity-50">
-            Proceed
+            {t("common:proceed")}
           </button>
         </div>
 
         <div className="space-y-4">
-          <h4 className="text-xs uppercase font-bold text-slate-400 tracking-widest px-2">Saved Connections</h4>
+          <h4 className="text-xs uppercase font-bold text-slate-400 tracking-widest px-2">{t("idInput.saved")}</h4>
           {loadingConns ? (
             <div className="flex items-center justify-center py-8 gap-2 text-slate-400">
-              <Loader2 className="animate-spin" size={20} /><span>Loading...</span>
+              <Loader2 className="animate-spin" size={20} /><span>{t("common:processing")}</span>
             </div>
           ) : (
             savedConns.map((conn, i) => (
