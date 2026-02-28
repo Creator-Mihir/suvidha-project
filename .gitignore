@@ -7,10 +7,14 @@ node_modules/
 # =====================
 # Environment Files
 # =====================
+# Environment Files
 .env
 **/.env
-.env.*
-**/.env.*
+.env.local
+.env.development
+.env.production
+.env.test
+
 
 # =====================
 # Build Files
