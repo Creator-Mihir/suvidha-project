@@ -60,7 +60,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
   };
 
   // ── Step 1: Connection ID Input ──
-  if (billStep === 'id-input') {
+  if (billStep === 'id-input' || !billStep) { 
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in zoom-in-95 duration-300">
         <div className="bg-white rounded-[3rem] shadow-2xl p-8 md:p-12 max-w-4xl w-full relative border border-slate-100">
@@ -122,7 +122,7 @@ export default function BillPayment({ billStep, setBillStep, connId, setConnId, 
         </div>
       </div>
     );
-  }
+  }  
 
   // ── Step 2: Bill Dashboard ──
   return (

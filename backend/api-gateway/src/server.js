@@ -14,9 +14,9 @@ const PORT = process.env.PORT || 3000;
 app.use(helmet());
 app.use(cors({
   origin: (process.env.ALLOWED_ORIGINS || '').split(','),
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
-  allowedHeaders: ['Content-Type', 'Authorization'],
-  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Electricity-Token'],
+    credentials: true,
 }));
 
 // ─── Body Parser ──────────────────────────────────────────────────────────────

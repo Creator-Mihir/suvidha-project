@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-const DUMMY_URL = process.env.DUMMY_SERVER_URL || 'http://localhost:4001';
+const DUMMY_URL = process.env.DUMMY_SERVER_URL || 'http://localhost:3001';
 const USE_DUMMY = process.env.USE_DUMMY_SERVER === 'true';
 
 /**
@@ -13,7 +13,7 @@ const getDummyBill = async (connectionId) => {
   if (USE_DUMMY) {
     try {
       const res = await axios.get(`${DUMMY_URL}/electricity/bill/${connectionId}`, {
-        timeout: 3000,
+        timeout: 15000,
       });
       return res.data;
     } catch (err) {
@@ -21,7 +21,7 @@ const getDummyBill = async (connectionId) => {
     }
   }
 
-  // ── Fallback mock data (matches your frontend UI exactly) ──
+  // ── Fallback mock data ──
   return {
     connectionId,
     consumerName:    'Ramesh Kumar',
@@ -51,7 +51,7 @@ const getDummyConnections = async (userId) => {
   if (USE_DUMMY) {
     try {
       const res = await axios.get(`${DUMMY_URL}/electricity/connections/${userId}`, {
-        timeout: 3000,
+        timeout: 15000,
       });
       return res.data;
     } catch (err) {
