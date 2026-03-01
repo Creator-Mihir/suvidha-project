@@ -35,7 +35,7 @@ function Login() {
     }
     return () => clearInterval(interval);
   }, [timer]);
-
+  const [demoOtp, setDemoOtp] = useState("");
   // ─── Keyboard Support ─────────────────────────────────────────────────────────
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -88,7 +88,8 @@ function Login() {
     setLoading(true);
     setError("");
     try {
-      await requestOTP(mobile);
+      const response = await requestOTP(mobile);
+      if (response?.debug_otp) setDemoOtp(response.debug_otp);  // ← capture OTP
       setStep(2);
       setTimer(30);
     } catch (err) {
@@ -97,7 +98,6 @@ function Login() {
       setLoading(false);
     }
   };
-
   // ─── Step 2: Verify OTP ───────────────────────────────────────────────────────
   const handleVerify = async () => {
     if (otp.length < 6) return;
@@ -263,6 +263,11 @@ function Login() {
                       <CheckCircle2 size={24} />{t("otp_sent", { mobile })}
                     </div>
                   </div>
+                    {demoOtp && (
+                    <div className="bg-yellow-50 border-2 border-yellow-300 text-yellow-800 rounded-2xl p-3 text-center">
+                      🔧 Demo Mode — OTP: <span className="font-black text-2xl tracking-widest">{demoOtp}</span>
+                    </div>
+                     )}
 
                   <div className="relative">
                     <Lock className="absolute left-6 top-1/2 -translate-y-1/2 text-orange-500" size={32} />
